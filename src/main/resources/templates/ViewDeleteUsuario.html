@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Borrar usuario</title>
+</head>
+<body>
+<form th:action="@{/pagina-delete-usuario}" method="post">
+	<label>Introduce the name of the user to delete: </label>
+	<input type="text" th:value="${username}" name="username">
+	<input type="submit" value="Submit">
+</form>
+</body>
+</html>
