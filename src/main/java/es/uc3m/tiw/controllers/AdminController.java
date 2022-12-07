@@ -2,6 +2,7 @@
 package es.uc3m.tiw.controllers;
 
 import es.uc3m.tiw.domains.Event;
+import es.uc3m.tiw.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import es.uc3m.tiw.domains.User;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class AdminController {
+
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 
 	@Autowired
 	RestTemplate restTemplate;
@@ -141,11 +151,17 @@ public class AdminController {
 	public String returnTodosEventos(Model model) {
 		Event[] listaEv = restTemplate.getForObject("http://localhost:11020/events", Event[].class);
 		model.addAttribute("eventList", listaEv);
+		model.addAttribute("imgUtil", new ImageUtil());
 		return "Read - Eventos";
 	}
 
 	@RequestMapping (value = "pagina-post-evento", method = RequestMethod.POST)
-	public String saveEvent(Model model, @ModelAttribute Event ev) {
+	public String saveEvent(Model model, @ModelAttribute Event ev, @RequestParam("photo") MultipartFile filePart)
+	throws IOException {
+		byte[] data = new byte[(int) filePart.getSize()];
+		filePart.getInputStream().read(data, 0, data.length);
+		ev.setImage(data);
+
 		Event newEvent = restTemplate.postForObject("http://localhost:11020/events", ev, Event.class);
 		model.addAttribute("evento", newEvent);
 		return "viewEventos";

@@ -5,7 +5,7 @@
 <title>Page to create a new user</title>
 </head>
 <body>
-<form th:action="@{/pagina-post-evento}" th:object="${evento}" method="post">
+<form th:action="@{/pagina-post-evento}" th:object="${evento}" method="post" enctype="multipart/form-data">
 	<label >Nombre:</label>
 	<input type="text" th:field="*{name}">
 	<label >Categoria:</label>
@@ -17,7 +17,7 @@
 	<label >Sala:</label>
 	<input type="text" th:field="*{hall}">
 	<label >Imagen:</label>
-	<input type="file" th:field="*{image}">
+	<input type="file" name="photo" accept="image/*">
 	<input type="submit" value="Submit" />
 </form>
 
