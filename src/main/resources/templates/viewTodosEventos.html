@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h2>ALL Events</h2>
+<table>
+<tr th:each="Evento : ${eventList}">
+	 <td>Event name:<span th:text="${evento.name}">default name</span></td>
+</tr>
+</table>
+</body>
+</html>
+

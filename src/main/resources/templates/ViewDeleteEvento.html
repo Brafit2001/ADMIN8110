@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Borrar evento</title>
+</head>
+<body>
+<form th:action="@{/pagina-delete-evento}" method="post">
+	<label>Introduce the name of the event to delete: </label>
+	<input type="text" th:value="${name}" name="name">
+	<input type="submit" value="Submit">
+</form>
+</body>
+</html>

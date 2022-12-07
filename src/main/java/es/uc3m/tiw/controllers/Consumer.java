@@ -1,41 +1,53 @@
 
 package es.uc3m.tiw.controllers;
 
-import java.util.List;
-
+import es.uc3m.tiw.domains.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import es.uc3m.tiw.domains.User;
-import es.uc3m.tiw.domains.Address;
 
 @Controller
 public class Consumer {
 
 	@Autowired
 	RestTemplate restTemplate;
-	
-	// NAVEGACION 
+
+	// ------------------------------------------------------------------
+	// 							NAVEGACION
+	// ------------------------------------------------------------------
 	@RequestMapping("/")	
 	public String index(){
 		return "index";
 	}
-	
+
+	@RequestMapping (value = "pagina-usuarios")
+	public String Usuarios(){
+		return "Usuarios";
+	}
+
+	@RequestMapping (value = "pagina-eventos")
+	public String Eventos(){
+		return "Eventos";
+	}
+
+
+	// ------------------------------------------------------------------
+	// 							USUARIOS
+	// ------------------------------------------------------------------
+
 	@RequestMapping (value = "pagina-crear-usuario", method = RequestMethod.GET)
 	public String mostrarElFormularioDelUsuario(Model modelo){
 		modelo.addAttribute("usuario", new User());
 		return "ViewCrearUsuario";
 	}
-
 	@RequestMapping (value = "pagina-borrar-usuario", method = RequestMethod.GET)
 	public String mostrarElFormularioBorrarUsuario(){
 		return "ViewDeleteUsuario.html";
@@ -47,8 +59,6 @@ public class Consumer {
 		return "ViewUpdateUsuario.html";
 	}
 
-
-	// LLAMADAS AL CONTROLADOR
 	@RequestMapping (value = "pagina-usuario/{name}", method = RequestMethod.GET)
 	public String returnUsuarios(Model model, @PathVariable String name) {
 		
@@ -96,8 +106,74 @@ public class Consumer {
 		restTemplate.put("http://localhost:8082/users/" + id, us, User.class);
 		return "index";	
 	}
-	
 
+	// ------------------------------------------------------------------
+	// 							EVENTOS
+	// ------------------------------------------------------------------
+
+	@RequestMapping (value = "pagina-crear-evento", method = RequestMethod.GET)
+	public String mostrarElFormularioDelEvento(Model modelo){
+		modelo.addAttribute("evento", new Event());
+		return "ViewCrearEvento.html";
+	}
+
+	@RequestMapping (value = "pagina-borrar-evento", method = RequestMethod.GET)
+	public String mostrarElFormularioBorrarEvento(){
+		return "ViewDeleteEvento.html";
+	}
+
+	@RequestMapping (value = "pagina-update-evento", method = RequestMethod.GET)
+	public String mostrarElFormularioUpdateEvento(Model modelo){
+		modelo.addAttribute("evento", new Event());
+		return "ViewUpdateEvento.html";
+	}
+
+	@RequestMapping (value = "pagina-evento/{name}", method = RequestMethod.GET)
+	public String returnEventos(Model model, @PathVariable String name) {
+
+		Event ev = restTemplate.getForObject("http://localhost:8083/events/{name}", Event.class, name);
+		model.addAttribute("evento", ev);
+		return "viewEventos";
+
+	}
+
+	@RequestMapping (value = "pagina-todos-eventos", method = RequestMethod.GET)
+	public String returnTodosEventos(Model model) {
+		Event[] listaEv = restTemplate.getForObject("http://localhost:8083/events", Event[].class);
+		model.addAttribute("eventList", listaEv);
+		return "viewTodosEventos";
+	}
+
+	@RequestMapping (value = "pagina-post-evento", method = RequestMethod.POST)
+	public String saveEvent(Model model, @ModelAttribute Event ev) {
+		Event newEvent = restTemplate.postForObject("http://localhost:8083/events", ev, Event.class);
+		model.addAttribute("evento", newEvent);
+		return "viewEventos";
+	}
+
+	@RequestMapping (value = "pagina-delete-evento", method = RequestMethod.POST)
+	public String deleteEvent(Model model, @RequestParam String name){
+		Event delEvent = restTemplate.getForObject("http://localhost:8083/events/{name}", Event.class, name);
+		if (delEvent != null) {
+			restTemplate.delete("http://localhost:8083/events/{id}", delEvent.getIdevent());
+		}
+		return "index";
+	}
+
+	@RequestMapping (value = "pagina-search-event", method = RequestMethod.POST)
+	public String searchEventos(Model model, @RequestParam String name) {
+		Event ev = restTemplate.getForObject("http://localhost:8083/events/{name}", Event.class, name);
+		model.addAttribute("evento", ev);
+		return "viewUpdateEvento";
+
+	}
+
+	@RequestMapping (value = "pagina-update-event", method = RequestMethod.POST)
+	public String updateEvent(Model model, @ModelAttribute Event ev){
+		Long id = ev.getIdevent();
+		restTemplate.put("http://localhost:8083/events/" + id, ev, Event.class);
+		return "index";
+	}
 	
 			
 }
