@@ -2,7 +2,7 @@
 <body>
 <h2>ALL Events</h2>
 <table>
-<tr th:each="Evento : ${eventList}">
+<tr th:each="evento : ${eventList}">
 	 <td>Event name:<span th:text="${evento.name}">default name</span></td>
 </tr>
 </table>

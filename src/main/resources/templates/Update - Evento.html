@@ -12,6 +12,7 @@
 </form>
 
 <form th:action="@{/pagina-update-evento}" th:object="${evento}" method="post">
+	<input type="hidden" th:field="*{idevent}">
     <label >Nombre:</label>
 	<input type="text" th:field="*{name}">
 	<label >Categoria:</label>
