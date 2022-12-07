@@ -2,6 +2,7 @@
 package es.uc3m.tiw.controllers;
 
 import es.uc3m.tiw.domains.Event;
+import es.uc3m.tiw.domains.Ticket;
 import es.uc3m.tiw.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -192,6 +193,76 @@ public class AdminController {
 		System.out.println(ev.getIdevent());
 		Long id = ev.getIdevent();
 		restTemplate.put("http://localhost:11020/events/" + id, ev, Event.class);
+		return "index";
+	}
+
+	// ------------------------------------------------------------------
+	// 							ENTRADAS
+	// ------------------------------------------------------------------
+
+	@RequestMapping (value = "pagina-crear-entrada", method = RequestMethod.GET)
+	public String mostrarElFormularioDeLaEntrada(Model modelo){
+		modelo.addAttribute("entrada", new Ticket());
+		return "Create - Entrada.html";
+	}
+
+	@RequestMapping (value = "pagina-borrar-entrada", method = RequestMethod.GET)
+	public String mostrarElFormularioBorrarEntrada(){
+		return "Delete - Entrada.html";
+	}
+
+	@RequestMapping (value = "pagina-update-entrada", method = RequestMethod.GET)
+	public String mostrarElFormularioUpdateEntrada(Model modelo){
+		modelo.addAttribute("entrada", new Ticket());
+		return "Update - Entrada.html";
+	}
+
+	@RequestMapping (value = "pagina-entrada/{id}", method = RequestMethod.GET)
+	public String returnEntradas(Model model, @PathVariable Long id) {
+
+		Ticket tic = restTemplate.getForObject("http://localhost:11030/tickets/{id}", Ticket.class, id);
+		model.addAttribute("entrada", tic);
+		return "viewEventos";
+
+	}
+
+	@RequestMapping (value = "pagina-todos-entradas", method = RequestMethod.GET)
+	public String returnTodosEntradas(Model model) {
+		Ticket[] listaTic = restTemplate.getForObject("http://localhost:11030/tickets", Ticket[].class);
+		model.addAttribute("ticketList", listaTic);
+		return "Read - Entradas";
+	}
+
+	@RequestMapping (value = "pagina-post-entrada", method = RequestMethod.POST)
+	public String saveEntrada(Model model, @ModelAttribute Ticket tic)
+	{
+		Ticket newTicket= restTemplate.postForObject("http://localhost:11030/tickets", tic, Ticket.class);
+		model.addAttribute("entrada", newTicket);
+		return "index";
+	}
+
+	@RequestMapping (value = "pagina-delete-entrada", method = RequestMethod.POST)
+	public String deleteEntrada(Model model, @RequestParam Long id){
+		Ticket delTicket = restTemplate.getForObject("http://localhost:11030/tickets/{id}", Ticket.class, id);
+		if (delTicket != null) {
+			restTemplate.delete("http://localhost:11030/tickets/{id}", delTicket.getIdticket());
+		}
+		return "index";
+	}
+
+	@RequestMapping (value = "pagina-search-entrada", method = RequestMethod.POST)
+	public String searchEntrada(Model model, @RequestParam Long id) {
+
+		Ticket tic = restTemplate.getForObject("http://localhost:11030/tickets/{id}", Ticket.class, id);
+		model.addAttribute("entrada", tic);
+		return "viewUpdateEntrada";
+
+	}
+
+	@RequestMapping (value = "pagina-update-entrada", method = RequestMethod.POST)
+	public String updateEntrada(Model model, @ModelAttribute Ticket tic){
+		Long id = tic.getIdticket();
+		restTemplate.put("http://localhost:11030/tickets/" + id, tic, Ticket.class);
 		return "index";
 	}
 	
