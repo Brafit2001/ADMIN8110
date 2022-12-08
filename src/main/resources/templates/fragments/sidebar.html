@@ -8,9 +8,12 @@
 <body>
 
   <div class="sidebar" th:fragment="sidebar">
-    <h2>Menu</h2>
+    <a href="/"><h2>Menu</h2></a>
     <ul>
-      <li><a href="pagina-usuarios"><i class="fas fa-users"></i>Users</a></li>
+      <li>
+        <img th:src="@{/static/assets/icons/User_Empty.svg}">
+        <a href="pagina-usuarios"><i class="fas fa-users"></i>Users</a>
+      </li>
       <li><a href="pagina-eventos"><i class="fas fa-events"></i>Events</a></li>
       <li><a href="pagina-entradas"><i class="fas fa-tickets"></i>Tickets</a></li>
       <li><a href="#"><i class="fas fa-project-diagram"></i>Chat</a></li>
