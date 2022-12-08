@@ -162,15 +162,13 @@ public class AdminController {
 		byte[] data = new byte[(int) filePart.getSize()];
 		filePart.getInputStream().read(data, 0, data.length);
 		ev.setImage(data);
-
-		Event newEvent = restTemplate.postForObject("http://localhost:11020/events", ev, Event.class);
-		model.addAttribute("evento", newEvent);
-		return "viewEventos";
+		restTemplate.postForObject("http://localhost:11020/events", ev, Event.class);
+		return "Eventos";
 	}
 
 	@RequestMapping (value = "pagina-delete-evento", method = RequestMethod.POST)
-	public String deleteEvent(Model model, @RequestParam String name){
-		Event delEvent = restTemplate.getForObject("http://localhost:11020/events/{name}", Event.class, name);
+	public String deleteEvent(Model model, @RequestParam Long id){
+		Event delEvent = restTemplate.getForObject("http://localhost:11020/events/{id}", Event.class, id);
 		if (delEvent != null) {
 			restTemplate.delete("http://localhost:11020/events/{id}", delEvent.getIdevent());
 		}

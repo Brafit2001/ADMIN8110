@@ -6,8 +6,8 @@
 </head>
 <body>
 <form th:action="@{/pagina-delete-evento}" method="post">
-	<label>Introduce the name of the event to delete: </label>
-	<input type="text" th:value="${name}" name="name">
+	<label>Introduce the id of the event to delete: </label>
+	<input type="number" th:value="${id}" name="id">
 	<input type="submit" value="Submit">
 </form>
 </body>
