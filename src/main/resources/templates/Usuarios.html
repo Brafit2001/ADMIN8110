@@ -15,18 +15,18 @@
 
 		<div class="main_content">
 			<div class="header">
-				User Admin Page
+				<p>User Admin Page</p>
 				<div class="links">
-					<a href="pagina-crear-usuario">Create User</a>
-					<a href="pagina-borrar-usuario">Delete User</a>
-					<a href="pagina-update-usuario">Update User</a>
+					<a class="crud-user create" href="pagina-crear-usuario">Create User</a>
+					<a class="crud-user delete" href="pagina-borrar-usuario">Delete User</a>
+					<a class="crud-user update" href="pagina-update-usuario">Update User</a>
 				</div>
 
 			</div>
 			<div class="info">
 
 				<form class="search-form" th:action="@{/pagina-search-usuario}" method="post">
-					<input class="search-input" type="text" th:value="*{username}" name="username" placeholder="Username">
+					<input class="search-input" type="text" th:value="*{username}" name="username" placeholder="Search Username">
 					<input class="search-button" type="submit" value="Submit" />
 				</form>
 
