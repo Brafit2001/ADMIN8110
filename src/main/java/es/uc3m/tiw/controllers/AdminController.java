@@ -141,13 +141,9 @@ public class AdminController {
 		return "Update - Evento.html";
 	}
 
-	@RequestMapping (value = "pagina-evento/{name}", method = RequestMethod.GET)
-	public String returnEventos(Model model, @PathVariable String name) {
-
-		Event ev = restTemplate.getForObject("http://localhost:11020/events/{name}", Event.class, name);
-		model.addAttribute("evento", ev);
-		return "viewEventos";
-
+	@RequestMapping (value = "pagina-select-evento", method = RequestMethod.GET)
+	public String mostrarElFormularioSelectEvento(){
+		return "Select - Evento.html";
 	}
 
 	@RequestMapping (value = "pagina-todos-eventos", method = RequestMethod.GET)
@@ -178,11 +174,12 @@ public class AdminController {
 	}
 
 	@RequestMapping (value = "pagina-search-evento", method = RequestMethod.POST)
-	public String searchEventos(Model model, @RequestParam String name) {
-
-		Event ev = restTemplate.getForObject("http://localhost:11020/events/{name}", Event.class, name);
+	public String searchEventos(Model model, @RequestParam Long id) {
+		Event ev = restTemplate.getForObject("http://localhost:11020/events/{id}", Event.class, id);
 		model.addAttribute("evento", ev);
-		return "viewUpdateEvento";
+		System.out.println(ev.getName());
+		model.addAttribute("imgUtil", new ImageUtil());
+		return "viewEventos";
 
 	}
 

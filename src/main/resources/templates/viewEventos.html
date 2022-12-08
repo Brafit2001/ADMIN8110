@@ -1,9 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<h1>Event INFO:</h1>
-
-<h2>Nombre del evento:<span th:text="${evento.name}">default name</span></h2>
-
+<h2>Events</h2>
+<table>
+    <tr>
+        <td>Event id:<span th:text="${evento.idevent}">default name</span></td>
+        <td>Event name:<span th:text="${evento.name}">default name</span></td>
+        <td>Event category:<span th:text="${evento.category}">default name</span></td>
+        <td>Event date:<span th:text="${evento.date}">default name</span></td>
+        <td>Event city:<span th:text="${evento.city}">default name</span></td>
+        <td>Event hall:<span th:text="${evento.hall}">default name</span></td>
+        <img th:src="${imgUtil.getImgData(evento.image)}" alt="">
+    </tr>
+</table>
 </body>
 </html>
 
