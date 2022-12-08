@@ -56,7 +56,9 @@ public class AdminController {
 	}
 
 	@RequestMapping (value = "pagina-entradas")
-	public String Entradas(){
+	public String Entradas(Model model){
+		Ticket[] listaTic = restTemplate.getForObject("http://localhost:11030/tickets", Ticket[].class);
+		model.addAttribute("ticketList", listaTic);
 		return "Entradas";
 	}
 
@@ -81,11 +83,6 @@ public class AdminController {
 		return "Update - Usuario.html";
 	}
 
-	@RequestMapping (value = "pagina-select-usuario", method = RequestMethod.GET)
-	public String mostrarElFormularioSelectUsuario(){
-		return "Select - Usuario.html";
-	}
-
 	@RequestMapping (value = "pagina-post-usuario", method = RequestMethod.POST)
 	public String saveUser(Model model, @ModelAttribute User us) {
 		restTemplate.postForObject("http://localhost:11010/users", us, User.class);
@@ -98,7 +95,7 @@ public class AdminController {
 		if (delUser != null) {
 			restTemplate.delete("http://localhost:11010/users/{id}", delUser.getIduser());
 		}
-		return "Usuarios";
+		return "index";
 	}
 
 	@RequestMapping (value = "pagina-search-usuario", method = RequestMethod.POST)
@@ -135,11 +132,6 @@ public class AdminController {
 	public String mostrarElFormularioUpdateEvento(Model modelo){
 		modelo.addAttribute("evento", new Event());
 		return "Update - Evento.html";
-	}
-
-	@RequestMapping (value = "pagina-select-evento", method = RequestMethod.GET)
-	public String mostrarElFormularioSelectEvento(){
-		return "Select - Evento.html";
 	}
 
 	@RequestMapping (value = "pagina-post-evento", method = RequestMethod.POST)
@@ -200,11 +192,6 @@ public class AdminController {
 		return "Update - Entrada.html";
 	}
 
-	@RequestMapping (value = "pagina-select-entrada", method = RequestMethod.GET)
-	public String mostrarElFormularioSelectEntrada(){
-		return "Select - Entrada.html";
-	}
-
 	@RequestMapping (value = "pagina-entrada/{id}", method = RequestMethod.GET)
 	public String returnEntradas(Model model, @PathVariable Long id) {
 
@@ -214,24 +201,17 @@ public class AdminController {
 
 	}
 
-	@RequestMapping (value = "pagina-todos-entradas", method = RequestMethod.GET)
-	public String returnTodosEntradas(Model model) {
-		Ticket[] listaTic = restTemplate.getForObject("http://localhost:11030/tickets", Ticket[].class);
-		model.addAttribute("ticketList", listaTic);
-		return "Read - Entrada";
-	}
-
 	@RequestMapping (value = "pagina-post-entrada", method = RequestMethod.POST)
 	public String saveEntrada(Model model, @ModelAttribute Ticket tic)
 	{
-		Ticket newTicket= restTemplate.postForObject("http://localhost:11030/tickets", tic, Ticket.class);
-		return "Entradas";
+		restTemplate.postForObject("http://localhost:11030/tickets", tic, Ticket.class);
+		return "index";
 	}
 
 	@RequestMapping (value = "pagina-delete-entrada", method = RequestMethod.POST)
 	public String deleteEntrada(Model model, @RequestParam Long id){
 		restTemplate.delete("http://localhost:11030/tickets/{id}", id);
-		return "Entradas";
+		return "index";
 	}
 
 	@RequestMapping (value = "pagina-search-entrada", method = RequestMethod.POST)
@@ -246,7 +226,7 @@ public class AdminController {
 	public String updateEntrada(Model model, @ModelAttribute Ticket tic){
 		Long id = tic.getIdticket();
 		restTemplate.put("http://localhost:11030/tickets/" + id, tic, Ticket.class);
-		return "Entradas";
+		return "index";
 	}
 	
 			

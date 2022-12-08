@@ -2,13 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Borrar Entrada</title>
+    <title>Delete Ticket</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{/pagina-delete-entrada}" method="post">
-    <label>Introduce the id of the entrada to delete: </label>
-    <input type="number" th:value="${id}" name="id">
-    <input type="submit" value="Submit">
-</form>
+
+
+    <div class="wrapper" >
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+
+        <div class="main_content">
+            <div th:replace="fragments/header-entrada :: header-entrada"></div>
+            <div class="info">
+
+                <form class="search-form" th:action="@{/pagina-delete-entrada}" method="post">
+                    <input class="search-input" type="number" th:value="*{id}" name="id" placeholder="Ticket id to Delete">
+                    <input class="search-button" type="submit" value="Delete" />
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

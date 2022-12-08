@@ -18,7 +18,7 @@
 				<table class="info-table">
 					<form  th:action="@{/pagina-update-evento}" th:object="${evento}" method="post" enctype="multipart/form-data">
 						<tr class="update-form">
-							<td><input class="update-input" type="number" th:field="*{idevent}" placeholder="Id"></td>
+							<td><input class="update-input" type="number" th:field="*{idevent}" placeholder="Event Id to Update"></td>
 							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
 							<td><input class="update-input" type="text" th:field="*{category}"  placeholder="Category"></td>
 							<td><input class="update-input" type="text" th:field="*{date}"  placeholder="Date"></td>

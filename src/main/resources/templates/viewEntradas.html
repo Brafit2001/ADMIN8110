@@ -1,13 +1,44 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Event</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
+</head>
 <body>
-<h1>Ticket INFO:</h1>
 
-<h2>id entrada:<span th:text="${entrada.idticket}">default name</span></h2>
-<h2>id usuario:<span th:text="${entrada.iduser}">default surname</span></h2>
-<h2>id evento:<span th:text="${entrada.idevent}">default surname</span></h2>
-<h2>Tipo:<span th:text="${entrada.type}">default surname</span></h2>
-<h2>precio:<span th:text="${entrada.price}">default surname</span></h2>
+    <div class="wrapper" >
+        <div th:replace="fragments/sidebar :: sidebar"></div>
 
+        <div class="main_content">
+            <div th:replace="fragments/header-entrada :: header-entrada"></div>
+            <div class="info">
+
+                <form class="search-form" th:action="@{/pagina-search-usuario}" method="post">
+                    <input class="search-input" type="text" th:value="*{username}" name="username" placeholder="Username">
+                    <input class="search-button" type="submit" value="Submit" />
+                </form>
+
+                <table class="info-table">
+                    <tr>
+                        <th>Id</th>
+                        <th>User id</th>
+                        <th>Event id</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${entrada.idticket}"></td>
+                        <td th:text="${entrada.iduser}"></td>
+                        <td th:text="${entrada.idevent}"></td>
+                        <td th:text="${entrada.type}"></td>
+                        <td th:text="${entrada.price}"></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 

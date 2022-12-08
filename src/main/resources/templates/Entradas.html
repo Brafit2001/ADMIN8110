@@ -11,26 +11,35 @@
         <div th:replace="fragments/sidebar :: sidebar"></div>
 
         <div class="main_content">
-            <div class="header">Tickets Admin Page</div>
+            <div th:replace="fragments/header-entrada :: header-entrada"></div>
             <div class="info">
-                <p>
-                    <a href="pagina-todos-entradas">Página para ver todas las entradas (GET)</a>
-                </p>
-                <p>
-                    <a href="pagina-crear-entrada">Formulario para guardar una entrada (POST)</a>
-                </p>
-                <p>
-                    <a href="pagina-borrar-entrada">Página para borrar una entrada (DELETE)</a>
-                </p>
-                <p>
-                    <a href="pagina-update-entrada">Pagina para hacer update de una entrada (PUT)</a>
-                </p>
-                <p>
-                    <a href="pagina-select-entrada">Pagina para hacer select de una entrada (GET)</a>
-                </p>
+
+                <form class="search-form" th:action="@{/pagina-search-entrada}" method="post">
+                    <input class="search-input" type="text" th:value="*{id}" name="id" placeholder="Search Ticket Id">
+                    <input class="search-button" type="submit" value="Submit" />
+                </form>
+
+                <table class="info-table">
+                    <tr>
+                        <th>Id</th>
+                        <th>User id</th>
+                        <th>Event id</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr th:each="ticket : ${ticketList}">
+                        <td th:text="${ticket.idticket}"></td>
+                        <td th:text="${ticket.iduser}"></td>
+                        <td th:text="${ticket.idevent}"></td>
+                        <td th:text="${ticket.type}"></td>
+                        <td th:text="${ticket.price}"></td>
+                    </tr>
+                </table>
+
             </div>
         </div>
 
     </div>
+
 </body>
 </html>

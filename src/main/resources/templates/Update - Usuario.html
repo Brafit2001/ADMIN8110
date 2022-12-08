@@ -17,7 +17,7 @@
                 <table class="info-table">
                     <form  th:action="@{/pagina-update-usuario}" th:object="${usuario}" method="post">
                         <tr class="update-form">
-                            <td><input class="update-input" type="number" th:field="*{iduser}" placeholder="Id"></td>
+                            <td><input class="update-input" type="number" th:field="*{iduser}" placeholder="User Id to Update"></td>
                             <td><input class="update-input" type="text" th:field="*{username}"  placeholder="Username"></td>
                             <td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
                             <td><input class="update-input" type="text" th:field="*{password}"  placeholder="Password"></td>
