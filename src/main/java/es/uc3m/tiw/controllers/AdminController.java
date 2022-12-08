@@ -40,7 +40,9 @@ public class AdminController {
 	}
 
 	@RequestMapping (value = "pagina-usuarios")
-	public String Usuarios(){
+	public String Usuarios(Model model){
+		User[] listaUs = restTemplate.getForObject("http://localhost:11010/users", User[].class);
+		model.addAttribute("userList", listaUs);
 		return "Usuarios";
 	}
 

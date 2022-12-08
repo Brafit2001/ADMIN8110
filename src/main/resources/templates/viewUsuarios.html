@@ -1,14 +1,56 @@
+
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>Insert title here</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
+</head>
 <body>
-<h1>USER INFO:</h1>
 
-<h2>id usuario:<span th:text="${usuario.iduser}">default name</span></h2>
-<h2>username:<span th:text="${usuario.username}">default surname</span></h2>
-<h2>nombre:<span th:text="${usuario.name}">default surname</span></h2>
-<h2>contraseña:<span th:text="${usuario.password}">default surname</span></h2>
-<h2>direccion:<span th:text="${usuario.address}">default surname</span></h2>
-<h2>telefono:<span th:text="${usuario.phone}">default surname</span></h2>
+    <div class="wrapper" >
+        <div th:replace="fragments/sidebar :: sidebar"></div>
 
+        <div class="main_content">
+            <div class="header">
+                User Admin Page
+                <div class="links">
+                    <a href="pagina-crear-usuario">Create User</a>
+                    <a href="pagina-borrar-usuario">Delete User</a>
+                    <a href="pagina-update-usuario">Update User</a>
+                </div>
+
+            </div>
+            <div class="info">
+
+                <form class="search-form" th:action="@{/pagina-search-usuario}" method="post">
+                    <input class="search-input" type="text" th:value="*{username}" name="username" placeholder="Username">
+                    <input class="search-button" type="submit" value="Submit" />
+                </form>
+
+                <table class="info-table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${usuario.iduser}"></td>
+                        <td th:text="${usuario.username}"></td>
+                        <td th:text="${usuario.name}"></td>
+                        <td th:text="${usuario.password}"></td>
+                        <td th:text="${usuario.address}"></td>
+                        <td th:text="${usuario.phone}"></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>

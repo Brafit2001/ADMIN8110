@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="ISO-8859-1"/>
-	<title>Insert title here</title>
+	<title>Users</title>
 	<link th:href="@{/styles/main.css}" rel="stylesheet" />
 
 </head>
@@ -14,24 +14,41 @@
 		<div th:replace="fragments/sidebar :: sidebar"></div>
 
 		<div class="main_content">
-			<div class="header">User Admin Page</div>
-			<div class="info">
-				<p>
-					<a href="pagina-todos-usuarios">Página para ver todos los usuarios (GET)</a>
-				</p>
-				<p>
-					<a href="pagina-crear-usuario">Formulario para guardar un usuario (POST)</a>
-				</p>
-				<p>
-					<a href="pagina-borrar-usuario">Página para borrar un usuario (DELETE)</a>
-				</p>
-				<p>
-					<a href="pagina-update-usuario">Pagina para hacer update de un usuario (PUT)</a>
-				</p>
+			<div class="header">
+				User Admin Page
+				<div class="links">
+					<a href="pagina-crear-usuario">Create User</a>
+					<a href="pagina-borrar-usuario">Delete User</a>
+					<a href="pagina-update-usuario">Update User</a>
+				</div>
 
-				<p>
-					<a href="pagina-select-usuario">Pagina para hacer un select de un usuario (PUT)</a>
-				</p>
+			</div>
+			<div class="info">
+
+				<form class="search-form" th:action="@{/pagina-search-usuario}" method="post">
+					<input class="search-input" type="text" th:value="*{username}" name="username" placeholder="Username">
+					<input class="search-button" type="submit" value="Submit" />
+				</form>
+
+				<table class="info-table">
+					<tr>
+						<th>Id</th>
+						<th>Username</th>
+						<th>Name</th>
+						<th>Password</th>
+						<th>Address</th>
+						<th>Phone</th>
+					</tr>
+					<tr th:each="usuario : ${userList}">
+						<td th:text="${usuario.iduser}"></td>
+						<td th:text="${usuario.username}"></td>
+						<td th:text="${usuario.name}"></td>
+						<td><span th:text="${usuario.password}">default username</span></td>
+						<td><span th:text="${usuario.address}">default username</span></td>
+						<td><span th:text="${usuario.phone}">default username</span></td>
+					</tr>
+				</table>
+
 			</div>
 		</div>
 
