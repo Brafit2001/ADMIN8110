@@ -1,17 +1,44 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>Event</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
+</head>
 <body>
-<h2>Events</h2>
-<table>
-    <tr>
-        <td>Event id:<span th:text="${evento.idevent}">default name</span></td>
-        <td>Event name:<span th:text="${evento.name}">default name</span></td>
-        <td>Event category:<span th:text="${evento.category}">default name</span></td>
-        <td>Event date:<span th:text="${evento.date}">default name</span></td>
-        <td>Event city:<span th:text="${evento.city}">default name</span></td>
-        <td>Event hall:<span th:text="${evento.hall}">default name</span></td>
-        <img th:src="${imgUtil.getImgData(evento.image)}" alt="">
-    </tr>
-</table>
+
+
+    <div class="wrapper" >
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+
+        <div class="main_content">
+            <div th:replace="fragments/header-evento :: header-evento"></div>
+            <div class="info">
+
+                <table class="info-table">
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Id Event</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>City</th>
+                        <th>Hall</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${evento.name}"></td>
+                        <td th:text="${evento.idevent}"></td>
+                        <td th:text="${evento.category}"></td>
+                        <td th:text="${evento.date}"></td>
+                        <td th:text="${evento.city}"></td>
+                        <td th:text="${evento.hall}"></td>
+                    </tr>
+                </table>
+                <img class="foto-index" th:src="${imgUtil.getImgData(evento.image)}" alt="">
+
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
 

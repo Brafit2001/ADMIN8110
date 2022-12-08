@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Page to update new evento</title>
+	<meta charset="UTF-8">
+	<title>Update Event</title>
+	<link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
 
-<form th:action="@{/pagina-update-evento}" th:object="${evento}" method="post" enctype="multipart/form-data">
-	<label >id del evento que se va a actualizar:</label>
-	<input type="number" th:field="*{idevent}">
-    <label >Nombre:</label>
-	<input type="text" th:field="*{name}">
-	<label >Categoria:</label>
-	<input type="text" th:field="*{category}">
-	<label >Fecha:</label>
-	<input type="text" th:field="*{date}">
-	<label >Ciudad:</label>
-	<input type="text" th:field="*{city}">
-	<label >Sala:</label>
-	<input type="text" th:field="*{hall}">
-	<label >Imagen:</label>
-	<input type="file" name="photo" accept="image/*">
-    <input type="submit" value="Update" />
-</form>
 
+	<div class="wrapper" >
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<div class="main_content">
+			<div th:replace="fragments/header-evento :: header-evento"></div>
+			<div class="info">
+
+				<table class="info-table">
+					<form  th:action="@{/pagina-update-evento}" th:object="${evento}" method="post" enctype="multipart/form-data">
+						<tr class="update-form">
+							<td><input class="update-input" type="number" th:field="*{idevent}" placeholder="Id"></td>
+							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
+							<td><input class="update-input" type="text" th:field="*{category}"  placeholder="Category"></td>
+							<td><input class="update-input" type="text" th:field="*{date}"  placeholder="Date"></td>
+							<td><input class="update-input" type="text" th:field="*{city}"  placeholder="City"></td>
+							<td><input class="update-input" type="number" th:field="*{hall}"  placeholder="Hall"></td>
+							<td><input type="file" name="photo" accept="image/*"></td>
+							<td><input class="update-button" type="submit" value="Update" /></td>
+						</tr>
+
+					</form>
+				</table>
+
+			</div>
+		</div>
+
+	</div>
 </body>
 </html>

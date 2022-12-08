@@ -12,15 +12,7 @@
 		<div th:replace="fragments/sidebar :: sidebar"></div>
 
 		<div class="main_content">
-			<div class="header">
-				<p>User Admin Page</p>
-				<div class="links">
-					<a class="crud-user create" href="pagina-crear-usuario">Create User</a>
-					<a class="crud-user delete" href="pagina-borrar-usuario">Delete User</a>
-					<a class="crud-user update" href="pagina-update-usuario">Update User</a>
-				</div>
-
-			</div>
+			<div th:replace="fragments/header-usuario :: header-usuario"></div>
 			<div class="info">
 
 				<form class="search-form" th:action="@{/pagina-delete-usuario}" method="post">

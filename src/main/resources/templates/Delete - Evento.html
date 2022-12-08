@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Borrar evento</title>
+	<meta charset="UTF-8">
+	<title>Delete Event</title>
+	<link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{/pagina-delete-evento}" method="post">
-	<label>Introduce the id of the event to delete: </label>
-	<input type="number" th:value="${id}" name="id">
-	<input type="submit" value="Submit">
-</form>
+
+	<div class="wrapper" >
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<div class="main_content">
+			<div th:replace="fragments/header-evento :: header-evento"></div>
+			<div class="info">
+
+				<form class="search-form" th:action="@{/pagina-delete-evento}" method="post">
+					<input class="search-input" type="number" th:value="*{id}" name="id" placeholder="Event id to Delete">
+					<input class="search-button" type="submit" value="Delete" />
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
 </body>
 </html>

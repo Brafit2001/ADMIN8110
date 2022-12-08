@@ -6,28 +6,41 @@
 	<link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-
 	<div class="wrapper" >
 		<div th:replace="fragments/sidebar :: sidebar"></div>
 
 		<div class="main_content">
-			<div class="header">Events Admin Page</div>
+			<div th:replace="fragments/header-evento :: header-evento"></div>
 			<div class="info">
-				<p>
-					<a href="pagina-todos-eventos">Página para ver todos los eventos (GET)</a>
-				</p>
-				<p>
-					<a href="pagina-crear-evento">Formulario para guardar un evento (POST)</a>
-				</p>
-				<p>
-					<a href="pagina-borrar-evento">Página para borrar un evento (DELETE)</a>
-				</p>
-				<p>
-					<a href="pagina-update-evento">Pagina para hacer update de un evento (PUT)</a>
-				</p>
-				<p>
-					<a href="pagina-select-evento">Pagina para hacer select de un evento (PUT)</a>
-				</p>
+
+				<form class="search-form" th:action="@{/pagina-search-evento}" method="post">
+					<input class="search-input" type="number" th:value="*{id}" name="id" placeholder="Search Event Id">
+					<input class="search-button" type="submit" value="Submit" />
+				</form>
+
+				<table class="info-table">
+					<tr>
+						<th>Event Name</th>
+						<th>Id Event</th>
+						<th>Category</th>
+						<th>Date</th>
+						<th>City</th>
+						<th>Hall</th>
+					</tr>
+					<tr th:each="evento : ${eventList}">
+
+						<td class="event-name-img">
+							<img th:src="${imgUtil.getImgData(evento.image)}" alt="">
+							<div th:text="${evento.name}"></div>
+						</td>
+						<td th:text="${evento.idevent}"></td>
+						<td th:text="${evento.category}"></td>
+						<td th:text="${evento.date}"></td>
+						<td th:text="${evento.city}"></td>
+						<td th:text="${evento.hall}"></td>
+					</tr>
+				</table>
+
 			</div>
 		</div>
 

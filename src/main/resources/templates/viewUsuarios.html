@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1"/>
-    <title>Insert title here</title>
+    <title>User</title>
     <link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
@@ -12,15 +12,7 @@
         <div th:replace="fragments/sidebar :: sidebar"></div>
 
         <div class="main_content">
-            <div class="header">
-                User Admin Page
-                <div class="links">
-                    <a href="pagina-crear-usuario">Create User</a>
-                    <a href="pagina-borrar-usuario">Delete User</a>
-                    <a href="pagina-update-usuario">Update User</a>
-                </div>
-
-            </div>
+            <div th:replace="fragments/header-usuario :: header-usuario"></div>
             <div class="info">
 
                 <form class="search-form" th:action="@{/pagina-search-usuario}" method="post">
