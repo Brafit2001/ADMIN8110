@@ -158,10 +158,7 @@ public class AdminController {
 
 	@RequestMapping (value = "pagina-delete-evento", method = RequestMethod.POST)
 	public String deleteEvent(Model model, @RequestParam Long id){
-		Event delEvent = restTemplate.getForObject("http://localhost:11020/events/{id}", Event.class, id);
-		if (delEvent != null) {
-			restTemplate.delete("http://localhost:11020/events/{id}", delEvent.getIdevent());
-		}
+		restTemplate.delete("http://localhost:11020/events/{id}", id);
 		return "index";
 	}
 
@@ -176,10 +173,11 @@ public class AdminController {
 	}
 
 	@RequestMapping (value = "pagina-update-evento", method = RequestMethod.POST)
-	public String updateEvent(Model model, @ModelAttribute Event ev){
-		System.out.println(ev.getName());
-		System.out.println(ev.getCategory());
-		System.out.println(ev.getIdevent());
+	public String updateEvent(Model model, @ModelAttribute Event ev, @RequestParam("photo") MultipartFile filePart)
+	throws IOException {
+		byte[] data = new byte[(int) filePart.getSize()];
+		filePart.getInputStream().read(data, 0, data.length);
+		ev.setImage(data);
 		Long id = ev.getIdevent();
 		restTemplate.put("http://localhost:11020/events/" + id, ev, Event.class);
 		return "index";

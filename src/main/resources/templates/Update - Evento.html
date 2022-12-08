@@ -5,14 +5,10 @@
 <title>Page to update new evento</title>
 </head>
 <body>
-<form th:action="@{/pagina-search-evento}" method="post">
-    <label>Search name:</label>
-    <input type="text" th:value="${name}" name="name">
-    <input type="submit" value="Search" />
-</form>
 
-<form th:action="@{/pagina-update-evento}" th:object="${evento}" method="post">
-	<input type="hidden" th:field="*{idevent}">
+<form th:action="@{/pagina-update-evento}" th:object="${evento}" method="post" enctype="multipart/form-data">
+	<label >id del evento que se va a actualizar:</label>
+	<input type="number" th:field="*{idevent}">
     <label >Nombre:</label>
 	<input type="text" th:field="*{name}">
 	<label >Categoria:</label>
@@ -24,7 +20,7 @@
 	<label >Sala:</label>
 	<input type="text" th:field="*{hall}">
 	<label >Imagen:</label>
-	<input type="file" th:field="*{image}">
+	<input type="file" name="photo" accept="image/*">
     <input type="submit" value="Update" />
 </form>
 
