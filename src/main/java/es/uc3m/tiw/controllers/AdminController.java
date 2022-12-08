@@ -204,6 +204,11 @@ public class AdminController {
 		return "Update - Entrada.html";
 	}
 
+	@RequestMapping (value = "pagina-select-entrada", method = RequestMethod.GET)
+	public String mostrarElFormularioSelectEntrada(){
+		return "Select - Entrada.html";
+	}
+
 	@RequestMapping (value = "pagina-entrada/{id}", method = RequestMethod.GET)
 	public String returnEntradas(Model model, @PathVariable Long id) {
 
@@ -224,25 +229,20 @@ public class AdminController {
 	public String saveEntrada(Model model, @ModelAttribute Ticket tic)
 	{
 		Ticket newTicket= restTemplate.postForObject("http://localhost:11030/tickets", tic, Ticket.class);
-		model.addAttribute("entrada", newTicket);
-		return "index";
+		return "Entradas";
 	}
 
 	@RequestMapping (value = "pagina-delete-entrada", method = RequestMethod.POST)
 	public String deleteEntrada(Model model, @RequestParam Long id){
-		Ticket delTicket = restTemplate.getForObject("http://localhost:11030/tickets/{id}", Ticket.class, id);
-		if (delTicket != null) {
-			restTemplate.delete("http://localhost:11030/tickets/{id}", delTicket.getIdticket());
-		}
-		return "index";
+		restTemplate.delete("http://localhost:11030/tickets/{id}", id);
+		return "Entradas";
 	}
 
 	@RequestMapping (value = "pagina-search-entrada", method = RequestMethod.POST)
 	public String searchEntrada(Model model, @RequestParam Long id) {
-
 		Ticket tic = restTemplate.getForObject("http://localhost:11030/tickets/{id}", Ticket.class, id);
 		model.addAttribute("entrada", tic);
-		return "viewUpdateEntrada";
+		return "viewEntradas";
 
 	}
 
@@ -250,7 +250,7 @@ public class AdminController {
 	public String updateEntrada(Model model, @ModelAttribute Ticket tic){
 		Long id = tic.getIdticket();
 		restTemplate.put("http://localhost:11030/tickets/" + id, tic, Ticket.class);
-		return "index";
+		return "Entradas";
 	}
 	
 			

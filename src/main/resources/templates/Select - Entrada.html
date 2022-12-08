@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Page to select a ticket</title>
+</head>
+<body>
+<form th:action="@{/pagina-search-entrada}" method="post">
+  <label>id de la entrada:</label>
+  <input type="text" th:value="*{id}" name="id">
+  <input type="submit" value="Submit" />
+</form>
+
+</body>
+</html>

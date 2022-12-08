@@ -5,23 +5,18 @@
     <title>Page to update ticket</title>
 </head>
 <body>
-<form th:action="@{/pagina-search-entrada}" method="post">
-    <label>Search id entrada:</label>
-    <input type="number" th:value="${idticket}" name="id">
-    <input type="submit" value="Search" />
-</form>
 
 <form th:action="@{/pagina-update-entrada}" th:object="${entrada}" method="post">
-
-    <input type="hidden" th:field="*{idticket}" value="Prueba">
+    <label >id de la entrada a actualizar:</label>
+    <input type="number" th:field="*{idticket}">
     <label >id usuario:</label>
-    <input type="number" th:field="*{iduser}" value="Prueba">
+    <input type="number" th:field="*{iduser}">
     <label >id evento:</label>
-    <input type="number" th:field="*{idevent}" value="Prueba">
+    <input type="number" th:field="*{idevent}">
     <label >tipo:</label>
-    <input type="text" th:field="*{type}" value="Prueba">
+    <input type="text" th:field="*{type}">
     <label >precio:</label>
-    <input type="number" th:field="*{price}" value="Prueba">
+    <input type="float" th:field="*{price}">
     <input type="submit" value="Update" />
 </form>
 
