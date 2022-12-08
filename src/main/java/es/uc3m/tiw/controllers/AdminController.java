@@ -82,14 +82,6 @@ public class AdminController {
 		return "Select - Usuario.html";
 	}
 
-	@RequestMapping (value = "pagina-todos-usuarios", method = RequestMethod.GET)
-	public String returnTodosUsuarios(Model model) {
-		User[] listaUs = restTemplate.getForObject("http://localhost:11010/users", User[].class);
-		model.addAttribute("userList", listaUs);
-		return "Read - Usuarios";
-	}
-	
-	
 	@RequestMapping (value = "pagina-post-usuario", method = RequestMethod.POST)
 	public String saveUser(Model model, @ModelAttribute User us) {
 		restTemplate.postForObject("http://localhost:11010/users", us, User.class);

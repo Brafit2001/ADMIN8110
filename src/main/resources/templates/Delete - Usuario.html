@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Borrar usuario</title>
+	<meta charset="UTF-8">
+	<title>Delete user</title>
+	<link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{/pagina-delete-usuario}" method="post">
-	<label>Introduce the username of the user to delete: </label>
-	<input type="text" th:value="${username}" name="username">
-	<input type="submit" value="Submit">
-</form>
+
+
+	<div class="wrapper" >
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<div class="main_content">
+			<div class="header">
+				<p>User Admin Page</p>
+				<div class="links">
+					<a class="crud-user create" href="pagina-crear-usuario">Create User</a>
+					<a class="crud-user delete" href="pagina-borrar-usuario">Delete User</a>
+					<a class="crud-user update" href="pagina-update-usuario">Update User</a>
+				</div>
+
+			</div>
+			<div class="info">
+
+				<form class="search-form" th:action="@{/pagina-delete-usuario}" method="post">
+					<input class="search-input" type="text" th:value="*{username}" name="username" placeholder="Username to Delete">
+					<input class="search-button" type="submit" value="Delete" />
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
 </body>
 </html>

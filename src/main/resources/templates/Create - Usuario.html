@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Page to create a new user</title>
+	<meta charset="UTF-8">
+	<title>Page to create a new user</title>
+	<link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{/pagina-post-usuario}" th:object="${usuario}" method="post">
-	<label >UserName:</label>
-	<input type="text" th:field="*{username}">
-	<label >User name:</label>
-	<input type="text" th:field="*{name}">
-	<label >User password:</label>
-	<input type="text" th:field="*{password}">
-	<label >User address:</label>
-	<input type="text" th:field="*{address}">
-	<label >User phone:</label>
-	<input type="number" th:field="*{phone}">
-	<input type="submit" value="Submit" />
-</form>
+
+
+	<div class="wrapper" >
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<div class="main_content">
+			<div class="header">
+				<p>User Admin Page</p>
+				<div class="links">
+					<a class="crud-user create" href="pagina-crear-usuario">Create User</a>
+					<a class="crud-user delete" href="pagina-borrar-usuario">Delete User</a>
+					<a class="crud-user update" href="pagina-update-usuario">Update User</a>
+				</div>
+
+			</div>
+			<div class="info">
+				<table class="info-table">
+					<form  th:action="@{/pagina-post-usuario}" th:object="${usuario}" method="post">
+						<tr class="update-form">
+							<td><input class="update-input" type="text" th:field="*{username}"  placeholder="Username"></td>
+							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
+							<td><input class="update-input" type="text" th:field="*{password}"  placeholder="Password"></td>
+							<td><input class="update-input" type="text" th:field="*{address}"  placeholder="Address"></td>
+							<td><input class="update-input" type="number" th:field="*{phone}"  placeholder="Phone"></td>
+							<td><input class="update-button" type="submit" value="Create" /></td>
+						</tr>
+
+					</form>
+				</table>
+
+			</div>
+		</div>
+
+	</div>
 
 </body>
 </html>
