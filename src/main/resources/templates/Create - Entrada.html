@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Page to create a new ticket</title>
 </head>
 <body>
+<form th:action="@{/pagina-post-entrada}" th:object="${entrada}" method="post" enctype="multipart/form-data">
+    <label >ID Usuario:</label>
+    <input type="number" th:field="*{iduser}">
+    <label >ID evento:</label>
+    <input type="number" th:field="*{idevent}">
+    <label >Tipo:</label>
+    <input type="text" th:field="*{type}">
+    <label >Precio:</label>
+    <input type="number" th:field="*{price}">
+    <input type="submit" value="Submit" />
+</form>
 
 </body>
 </html>

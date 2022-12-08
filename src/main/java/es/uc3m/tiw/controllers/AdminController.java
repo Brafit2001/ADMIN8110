@@ -49,6 +49,11 @@ public class AdminController {
 		return "Eventos";
 	}
 
+	@RequestMapping (value = "pagina-entradas")
+	public String Entradas(){
+		return "Entradas";
+	}
+
 
 	// ------------------------------------------------------------------
 	// 							USUARIOS
@@ -222,7 +227,7 @@ public class AdminController {
 
 		Ticket tic = restTemplate.getForObject("http://localhost:11030/tickets/{id}", Ticket.class, id);
 		model.addAttribute("entrada", tic);
-		return "viewEventos";
+		return "viewEntradas";
 
 	}
 
@@ -230,7 +235,7 @@ public class AdminController {
 	public String returnTodosEntradas(Model model) {
 		Ticket[] listaTic = restTemplate.getForObject("http://localhost:11030/tickets", Ticket[].class);
 		model.addAttribute("ticketList", listaTic);
-		return "Read - Entradas";
+		return "Read - Entrada";
 	}
 
 	@RequestMapping (value = "pagina-post-entrada", method = RequestMethod.POST)

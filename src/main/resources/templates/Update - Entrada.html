@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Page to update ticket</title>
 </head>
 <body>
+<form th:action="@{/pagina-search-entrada}" method="post">
+    <label>Search id entrada:</label>
+    <input type="number" th:value="${id}" name="id">
+    <input type="submit" value="Search" />
+</form>
+
+<form th:action="@{/pagina-update-entrada}" th:object="${entrada}" method="post">
+
+    <input type="hidden" th:field="*{idticket}" value="Prueba">
+    <label >id usuario:</label>
+    <input type="number" th:field="*{iduser}" value="Prueba">
+    <label >id evento:</label>
+    <input type="number" th:field="*{idevent}" value="Prueba">
+    <label >tipo:</label>
+    <input type="text" th:field="*{type}" value="Prueba">
+    <label >precio:</label>
+    <input type="number" th:field="*{price}" value="Prueba">
+    <input type="submit" value="Update" />
+</form>
 
 </body>
 </html>
