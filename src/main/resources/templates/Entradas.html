@@ -2,23 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tickets</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-    <p>
-        <a href="pagina-entrada/gabriel">Página para ver una entrada (GET)</a>
-    </p>
-    <p>
-        <a href="pagina-todos-entradas">Página para ver todas las entradas (GET)</a>
-    </p>
-    <p>
-        <a href="pagina-crear-entrada">Formulario para guardar una entrada (POST)</a>
-    </p>
-    <p>
-        <a href="pagina-borrar-entrada">Página para borrar una entrada (DELETE)</a>
-    </p>
-    <p>
-        <a href="pagina-update-entrada">Pagina para hacer update de una entrada (PUT)</a>
-    </p>
+
+    <div class="wrapper" >
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+
+        <div class="main_content">
+            <div class="header">Tickets Admin Page</div>
+            <div class="info">
+                <p>
+                    <a href="pagina-entrada/gabriel">Página para ver una entrada (GET)</a>
+                </p>
+                <p>
+                    <a href="pagina-todos-entradas">Página para ver todas las entradas (GET)</a>
+                </p>
+                <p>
+                    <a href="pagina-crear-entrada">Formulario para guardar una entrada (POST)</a>
+                </p>
+                <p>
+                    <a href="pagina-borrar-entrada">Página para borrar una entrada (DELETE)</a>
+                </p>
+                <p>
+                    <a href="pagina-update-entrada">Pagina para hacer update de una entrada (PUT)</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
