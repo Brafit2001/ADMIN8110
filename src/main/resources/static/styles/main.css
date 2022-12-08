@@ -118,6 +118,12 @@ body{
     margin-left: 55px;
 }
 
+.wrapper .main_content .info .foto-index{
+    width: 95%;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
 .wrapper .main_content .info div{
     margin-bottom: 20px;
 }
@@ -184,6 +190,17 @@ body{
     border-collapse: collapse;
     width: 100%;
 }
+.wrapper .main_content .info-table img{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+.wrapper .main_content .info-table .event-name-img{
+    display: flex;
+    gap: 30px;
+
+}
+
 
 .wrapper .main_content .info-table .divider{
     width: 100%;

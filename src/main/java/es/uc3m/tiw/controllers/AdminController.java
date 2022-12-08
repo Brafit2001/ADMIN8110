@@ -47,8 +47,12 @@ public class AdminController {
 	}
 
 	@RequestMapping (value = "pagina-eventos")
-	public String Eventos(){
+	public String Eventos(Model model){
+		Event[] listaEv = restTemplate.getForObject("http://localhost:11020/events", Event[].class);
+		model.addAttribute("eventList", listaEv);
+		model.addAttribute("imgUtil", new ImageUtil());
 		return "Eventos";
+
 	}
 
 	@RequestMapping (value = "pagina-entradas")
@@ -85,7 +89,7 @@ public class AdminController {
 	@RequestMapping (value = "pagina-post-usuario", method = RequestMethod.POST)
 	public String saveUser(Model model, @ModelAttribute User us) {
 		restTemplate.postForObject("http://localhost:11010/users", us, User.class);
-		return "Usuarios";
+		return "index";
 	}
 	
 	@RequestMapping (value = "pagina-delete-usuario", method = RequestMethod.POST)
@@ -138,14 +142,6 @@ public class AdminController {
 		return "Select - Evento.html";
 	}
 
-	@RequestMapping (value = "pagina-todos-eventos", method = RequestMethod.GET)
-	public String returnTodosEventos(Model model) {
-		Event[] listaEv = restTemplate.getForObject("http://localhost:11020/events", Event[].class);
-		model.addAttribute("eventList", listaEv);
-		model.addAttribute("imgUtil", new ImageUtil());
-		return "Read - Eventos";
-	}
-
 	@RequestMapping (value = "pagina-post-evento", method = RequestMethod.POST)
 	public String saveEvent(Model model, @ModelAttribute Event ev, @RequestParam("photo") MultipartFile filePart)
 	throws IOException {
@@ -153,7 +149,7 @@ public class AdminController {
 		filePart.getInputStream().read(data, 0, data.length);
 		ev.setImage(data);
 		restTemplate.postForObject("http://localhost:11020/events", ev, Event.class);
-		return "Eventos";
+		return "index";
 	}
 
 	@RequestMapping (value = "pagina-delete-evento", method = RequestMethod.POST)
