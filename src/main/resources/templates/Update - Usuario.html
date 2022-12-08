@@ -5,25 +5,20 @@
 <title>Page to update new user</title>
 </head>
 <body>
-<form th:action="@{/pagina-search-usuario}" method="post">
-    <label>Search Username:</label>
-    <input type="text" th:value="${username}" name="username">
-    <input type="submit" value="Search" />
-</form>
 
 <form th:action="@{/pagina-update-usuario}" th:object="${usuario}" method="post">
-
-    <input type="hidden" th:field="*{iduser}" value="Prueba">
+    <label>Id del usuario que se va a actualizar:</label>
+    <input type="number" th:field="*{iduser}">
     <label >Username:</label>
-    <input type="text" th:field="*{username}" value="Prueba">
+    <input type="text" th:field="*{username}">
     <label >User name:</label>
-    <input type="text" th:field="*{name}" value="Prueba">
+    <input type="text" th:field="*{name}">
     <label >User password:</label>
-    <input type="text" th:field="*{password}" value="Prueba">
+    <input type="text" th:field="*{password}">
     <label >User address:</label>
-    <input type="text" th:field="*{address}" value="Prueba">
+    <input type="text" th:field="*{address}">
     <label >User phone:</label>
-    <input type="text" th:field="*{phone}" value="Prueba">
+    <input type="number" th:field="*{phone}">
     <input type="submit" value="Update" />
 </form>
 

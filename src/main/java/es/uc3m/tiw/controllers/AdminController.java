@@ -75,15 +75,11 @@ public class AdminController {
 		return "Update - Usuario.html";
 	}
 
-	@RequestMapping (value = "pagina-usuario/{name}", method = RequestMethod.GET)
-	public String returnUsuarios(Model model, @PathVariable String name) {
-		
-		User us = restTemplate.getForObject("http://localhost:11010/users/{name}", User.class, name);
-		model.addAttribute("usuario", us);
-		return "viewUsuarios";
-		
+	@RequestMapping (value = "pagina-select-usuario", method = RequestMethod.GET)
+	public String mostrarElFormularioSelectUsuario(){
+		return "Select - Usuario.html";
 	}
-	
+
 	@RequestMapping (value = "pagina-todos-usuarios", method = RequestMethod.GET)
 	public String returnTodosUsuarios(Model model) {
 		User[] listaUs = restTemplate.getForObject("http://localhost:11010/users", User[].class);
@@ -94,9 +90,8 @@ public class AdminController {
 	
 	@RequestMapping (value = "pagina-post-usuario", method = RequestMethod.POST)
 	public String saveUser(Model model, @ModelAttribute User us) {
-		User newUser = restTemplate.postForObject("http://localhost:11010/users", us, User.class);
-		model.addAttribute("usuario", newUser);
-		return "viewUsuarios";
+		restTemplate.postForObject("http://localhost:11010/users", us, User.class);
+		return "Usuarios";
 	}
 	
 	@RequestMapping (value = "pagina-delete-usuario", method = RequestMethod.POST)
@@ -105,14 +100,14 @@ public class AdminController {
 		if (delUser != null) {
 			restTemplate.delete("http://localhost:11010/users/{id}", delUser.getIduser());
 		}
-		return "index";	
+		return "Usuarios";
 	}
 
 	@RequestMapping (value = "pagina-search-usuario", method = RequestMethod.POST)
 	public String searchUsuarios(Model model, @RequestParam String username) {
 		User us = restTemplate.getForObject("http://localhost:11010/users/{username}", User.class, username);
 		model.addAttribute("usuario", us);
-		return "viewUpdateUsuario";
+		return "viewUsuarios";
 		
 	}
 	
@@ -120,7 +115,7 @@ public class AdminController {
 	public String updateUser(Model model, @ModelAttribute User us){
 		Long id = us.getIduser();
 		restTemplate.put("http://localhost:11010/users/" + id, us, User.class);
-		return "index";	
+		return "Usuarios";
 	}
 
 	// ------------------------------------------------------------------
