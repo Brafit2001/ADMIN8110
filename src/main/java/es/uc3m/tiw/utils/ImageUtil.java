@@ -5,9 +5,9 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 
 public class ImageUtil {
-    public String  getImgData(byte[] byteData) {
-
+    public String  getImgData(String byteData) {
+        byte[] data = java.util.Base64.getDecoder().decode(byteData);
         return "data:image/png;base64," +
-                StringUtils.newStringUtf8(Base64.encodeBase64(byteData, false));
+                StringUtils.newStringUtf8(Base64.encodeBase64(data, false));
     }
 }

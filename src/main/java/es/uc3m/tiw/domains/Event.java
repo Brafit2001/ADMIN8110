@@ -24,7 +24,7 @@ public class Event implements Serializable {
 	
 	private String hall;
 	
-	private byte[] image;
+	private String image;
 		
 	public Event() {
 	}
@@ -45,11 +45,11 @@ public class Event implements Serializable {
 		this.name = name;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return this.image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

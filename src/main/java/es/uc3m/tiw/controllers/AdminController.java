@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 
 @Controller
 public class AdminController {
@@ -139,7 +140,9 @@ public class AdminController {
 	throws IOException {
 		byte[] data = new byte[(int) filePart.getSize()];
 		filePart.getInputStream().read(data, 0, data.length);
-		ev.setImage(data);
+		String s = Base64.getEncoder().encodeToString(data);
+		ev.setImage(s);
+
 		restTemplate.postForObject("http://localhost:11020/events", ev, Event.class);
 		return "index";
 	}
@@ -165,7 +168,8 @@ public class AdminController {
 	throws IOException {
 		byte[] data = new byte[(int) filePart.getSize()];
 		filePart.getInputStream().read(data, 0, data.length);
-		ev.setImage(data);
+		String s = Base64.getEncoder().encodeToString(data);
+		ev.setImage(s);
 		Long id = ev.getIdevent();
 		restTemplate.put("http://localhost:11020/events/" + id, ev, Event.class);
 		return "index";
