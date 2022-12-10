@@ -7,11 +7,7 @@ import es.uc3m.tiw.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import es.uc3m.tiw.domains.User;
@@ -25,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 @Controller
+@CrossOrigin
 public class AdminController {
 
 	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
