@@ -20,7 +20,14 @@
 						<tr class="update-form">
 							<td><input class="update-input" type="number" th:field="*{idevent}" placeholder="Event Id to Update"></td>
 							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
-							<td><input class="update-input" type="text" th:field="*{category}"  placeholder="Category"></td>
+							<td>
+								<select class="update-input" id="search-category" name="filtrarcategoria" th:field="*{category}">
+									<option value="0">Choose a collection</option>
+									<option value="Concert">Concert</option>
+									<option value="Festival">Festival</option>
+									<option value="Museum">Museum</option>
+									<option value="Sport Event">Sport Event</option>
+							</td>
 							<td><input class="update-input" type="text" th:field="*{date}"  placeholder="Date"></td>
 							<td><input class="update-input" type="text" th:field="*{city}"  placeholder="City"></td>
 							<td><input class="update-input" type="number" th:field="*{hall}"  placeholder="Hall"></td>

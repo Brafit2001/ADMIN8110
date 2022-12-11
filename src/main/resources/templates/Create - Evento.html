@@ -17,12 +17,18 @@
 				<table class="info-table">
 					<form  th:action="@{/pagina-post-evento}" th:object="${evento}" method="post" enctype="multipart/form-data">
 						<tr class="update-form">
-							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
-							<td><input class="update-input" type="text" th:field="*{category}"  placeholder="Category"></td>
-							<td><input class="update-input" type="text" th:field="*{date}"  placeholder="Date"></td>
-							<td><input class="update-input" type="text" th:field="*{city}"  placeholder="City"></td>
-							<td><input class="update-input" type="text" th:field="*{hall}"  placeholder="Hall"></td>
-							<td><input type="file" name="photo" accept="image/*"></td>
+							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name" required></td>
+							<td> <select class="update-input" id="search-category" name="filtrarcategoria" th:field="*{category}" required>
+								<option value="0">Choose a collection</option>
+								<option value="Concert">Concert</option>
+								<option value="Festival">Festival</option>
+								<option value="Museum">Museum</option>
+								<option value="Sport Event">Sport Event</option>
+							</select></td>
+							<td><input class="update-input" type="text" th:field="*{date}"  placeholder="Date" required></td>
+							<td><input class="update-input" type="text" th:field="*{city}"  placeholder="City" required></td>
+							<td><input class="update-input" type="text" th:field="*{hall}"  placeholder="Hall" required></td>
+							<td><input type="file" name="photo" accept="image/*" required></td>
 							<td><input class="update-button" type="submit" value="Create" /></td>
 						</tr>
 

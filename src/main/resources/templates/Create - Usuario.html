@@ -18,11 +18,11 @@
 				<table class="info-table">
 					<form  th:action="@{/pagina-post-usuario}" th:object="${usuario}" method="post">
 						<tr class="update-form">
-							<td><input class="update-input" type="text" th:field="*{username}"  placeholder="Username"></td>
-							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name"></td>
-							<td><input class="update-input" type="text" th:field="*{password}"  placeholder="Password"></td>
-							<td><input class="update-input" type="text" th:field="*{address}"  placeholder="Address"></td>
-							<td><input class="update-input" type="number" th:field="*{phone}"  placeholder="Phone"></td>
+							<td><input class="update-input" type="text" th:field="*{username}"  placeholder="Username" required></td>
+							<td><input class="update-input" type="text" th:field="*{name}"  placeholder="Name" required></td>
+							<td><input class="update-input" type="text" th:field="*{password}"  placeholder="Password" required></td>
+							<td><input class="update-input" type="text" th:field="*{address}"  placeholder="Address" required></td>
+							<td><input class="update-input" type="number" th:field="*{phone}"  placeholder="Phone" required></td>
 							<td><input class="update-button" type="submit" value="Create" /></td>
 						</tr>
 

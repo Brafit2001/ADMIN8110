@@ -17,10 +17,10 @@
                 <table class="info-table">
                     <form  th:action="@{/pagina-post-entrada}" th:object="${entrada}" method="post">
                         <tr class="update-form">
-                            <td><input class="update-input" type="number" th:field="*{iduser}"  placeholder="User Id"></td>
-                            <td><input class="update-input" type="number" th:field="*{idevent}"  placeholder="Event Id"></td>
-                            <td><input class="update-input" type="text" th:field="*{type}"  placeholder="Type"></td>
-                            <td><input class="update-input" type="number" th:field="*{price}"  placeholder="Price" value></td>
+                            <td><input class="update-input" type="number" th:field="*{iduser}"  placeholder="User Id" required></td>
+                            <td><input class="update-input" type="number" th:field="*{idevent}"  placeholder="Event Id" required></td>
+                            <td><input class="update-input" type="text" th:field="*{type}"  placeholder="Type" required></td>
+                            <td><input class="update-input" type="number" th:field="*{price}"  placeholder="Price" value required></td>
                             <td><input class="update-button" type="submit" value="Create" /></td>
                         </tr>
 
